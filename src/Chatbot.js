@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import ReactMarkdown from "react-markdown";
 
 export default function Chatbot() {
     const [messages, setMessages] = useState([]);
@@ -14,37 +15,52 @@ export default function Chatbot() {
         setInput("");
         
         try {
-            const response = await fetch("http://localhost:5000/chat", {
+            const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=AIzaSyAmKVxPUm2AZMILup0Y_JeNsO5YXEtlyUo", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ message: input })
+                body: JSON.stringify({
+                    contents: [{ parts: [{ text: input }] }]
+                })
             });
-            
+    
             const data = await response.json();
-            setMessages([...newMessages, { sender: "bot", text: data.reply }]);
+            const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || "Sorry, I couldn't generate a response.";
+    
+            setMessages([...newMessages, { sender: "bot", text: reply }]);
         } catch (error) {
-            setMessages([...newMessages, { sender: "bot", text: "Error: Unable to connect." }]);
+            setMessages([...newMessages, { sender: "bot", text: "Error: Unable to connect to Gemini AI." }]);
         }
     };
+    
 
     const uploadResume = async () => {
         if (!file) return;
-        
-        const formData = new FormData();
-        formData.append("file", file);
-        
-        try {
-            const response = await fetch("http://localhost:5000/upload_resume", {
-                method: "POST",
-                body: formData
-            });
-            
-            const data = await response.json();
-            setMessages([...messages, { sender: "bot", text: data.reply }]);
-        } catch (error) {
-            setMessages([...messages, { sender: "bot", text: "Error: Resume upload failed." }]);
-        }
+    
+        const reader = new FileReader();
+        reader.onload = async (event) => {
+            const resumeText = event.target.result; // Extracted text from file
+    
+            try {
+                const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=AIzaSyAmKVxPUm2AZMILup0Y_JeNsO5YXEtlyUo", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: `Analyze this resume and suggest a career path: ${resumeText}` }] }]
+                    })
+                });
+    
+                const data = await response.json();
+                const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || "Sorry, I couldn't analyze the resume.";
+    
+                setMessages([...messages, { sender: "bot", text: reply }]);
+            } catch (error) {
+                setMessages([...messages, { sender: "bot", text: "Error: Resume upload failed." }]);
+            }
+        };
+    
+        reader.readAsText(file);
     };
+    
 
     return (
         <motion.div 
@@ -62,7 +78,8 @@ export default function Chatbot() {
                         initial={{ scale: 0.9 }} 
                         animate={{ scale: 1 }}
                     >
-                        {msg.text}
+                        {/* {msg.text} */}
+                        <ReactMarkdown>{msg.text}</ReactMarkdown> {/* Renders Markdown */}
                     </motion.div>
                 ))}
             </div>
