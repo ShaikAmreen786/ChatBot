@@ -147,7 +147,7 @@ export default function LandingPage() {
                         transition={{ duration: 0.8 }}
                         className="text-center max-w-3xl mx-auto mb-20"
                     >
-                        <h2 className="text-4xl font-bold mb-6 gradient-text">
+                        <h2 className="text-4xl font-bold mb-6">
                             Empower Your Learning Journey
                         </h2>
                         <p className="text-gray-600 text-lg">
