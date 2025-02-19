@@ -24,99 +24,116 @@ export default function LandingPage() {
     return (
         <div className="min-h-screen bg-white">
             {/* Hero Section */}
-            <section className="relative overflow-hidden bg-gradient-to-r from-[#6366F1] to-[#4F46E5] py-32">
-                {/* Background Pattern */}
-                <div className="absolute inset-0 opacity-10">
-                    <div className="absolute inset-0" 
-                         style={{
-                             backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-                         }}
+            <section className="relative overflow-hidden bg-gradient-to-br from-purple-600 via-indigo-600 to-blue-700 min-h-[90vh] flex items-center">
+                {/* Animated Background Pattern */}
+                <div className="absolute inset-0 opacity-5">
+                    <div 
+                        className="absolute inset-0 animate-float opacity-50"
+                        style={{
+                            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+                        }}
                     />
                 </div>
 
-                <div className="container mx-auto px-6 relative">
+                {/* Content Container */}
+                <div className="container mx-auto px-6 relative py-20 md:py-32">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8 }}
                         className="text-center max-w-5xl mx-auto"
                     >
-                        <motion.h1 
-                            className="text-7xl font-bold mb-8 text-white leading-tight"
+                        {/* Main Heading */}
+                        <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.2 }}
+                            className="mb-8"
                         >
-                            Master Your Professional 
-                            <span className="block mt-2">Growth Journey</span>
-                        </motion.h1>
+                            <h1 className="text-4xl md:text-7xl font-bold text-white leading-tight tracking-tight">
+                                Master Your Professional
+                                <span className="block mt-2 bg-gradient-to-r from-white to-indigo-200 bg-clip-text text-transparent">
+                                    Growth Journey
+                                </span>
+                            </h1>
+                        </motion.div>
                         
+                        {/* Subheading */}
                         <motion.p 
-                            className="text-xl mb-12 text-indigo-100 max-w-3xl mx-auto leading-relaxed"
+                            className="text-lg md:text-xl mb-12 text-indigo-100 max-w-3xl mx-auto leading-relaxed font-medium"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.4 }}
                         >
-                            SkillPath helps you identify, plan, and track your learning journey 
-                            with personalized roadmaps tailored to your career goals.
+                            Personalized roadmaps to help you achieve your career goals 
+                            and track your progress with precision and clarity.
                         </motion.p>
 
+                        {/* CTA Buttons */}
                         <motion.div
-                            className="flex gap-6 justify-center"
+                            className="flex flex-col md:flex-row gap-6 justify-center items-center"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.6 }}
                         >
-                            <button 
-                                className="bg-white text-indigo-600 px-10 py-4 rounded-full font-bold text-lg
-                                         hover:bg-indigo-50 transition-all shadow-xl hover:shadow-2xl
-                                         transform hover:scale-105 duration-200"
+                            <motion.button 
+                                className="group relative bg-white text-[#4F46E5] px-8 md:px-12 py-4 rounded-full 
+                                         font-bold text-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-1
+                                         transition-all duration-300 min-w-[200px]"
                                 onClick={() => setShowChatbot(true)}
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.98 }}
                             >
-                                Start Your Journey
-                            </button>
-                            <button 
-                                className="bg-transparent border-2 border-white text-white px-10 py-4 rounded-full 
-                                         font-bold text-lg hover:bg-white/10 transition-all"
+                                <span className="relative z-10">Start Your Journey</span>
+                                <div className="absolute inset-0 bg-gradient-to-r from-white to-indigo-100 
+                                              rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"/>
+                            </motion.button>
+
+                            <motion.button 
+                                className="group px-8 md:px-12 py-4 rounded-full font-bold text-lg
+                                         border-2 border-white/30 text-white hover:bg-white/10 
+                                         transition-all duration-300 min-w-[200px]"
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.98 }}
                             >
                                 Watch Demo
-                            </button>
+                                <svg className="w-5 h-5 ml-2 inline-block transform group-hover:translate-x-1 transition-transform duration-200" 
+                                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                </svg>
+                            </motion.button>
                         </motion.div>
 
                         {/* Stats Section */}
                         <motion.div 
-                            className="grid grid-cols-3 gap-8 mt-20 max-w-4xl mx-auto"
+                            className="grid grid-cols-2 md:grid-cols-3 gap-8 mt-16 max-w-4xl mx-auto"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.8 }}
                         >
-                            <div className="text-center">
-                                <h3 className="text-4xl font-bold text-white mb-2">500+</h3>
-                                <p className="text-indigo-200">Career Paths</p>
-                            </div>
-                            <div className="text-center">
-                                <h3 className="text-4xl font-bold text-white mb-2">50K+</h3>
-                                <p className="text-indigo-200">Active Learners</p>
-                            </div>
-                            <div className="text-center">
-                                <h3 className="text-4xl font-bold text-white mb-2">95%</h3>
-                                <p className="text-indigo-200">Success Rate</p>
-                            </div>
+                            {[
+                                { number: "10K+", label: "Active Learners" },
+                                { number: "500+", label: "Career Paths" },
+                                { number: "95%", label: "Success Rate" }
+                            ].map((stat, index) => (
+                                <div key={index} className="text-center">
+                                    <div className="text-3xl md:text-4xl font-bold text-white mb-2">
+                                        {stat.number}
+                                    </div>
+                                    <div className="text-indigo-200 font-medium">
+                                        {stat.label}
+                                    </div>
+                                </div>
+                            ))}
                         </motion.div>
                     </motion.div>
                 </div>
 
                 {/* Wave Shape Divider */}
                 <div className="absolute bottom-0 left-0 right-0">
-                    <svg 
-                        viewBox="0 0 1440 120" 
-                        fill="none" 
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path 
-                            d="M0 30L48 35C96 40 192 50 288 55C384 60 480 60 576 55C672 50 768 40 864 45C960 50 1056 70 1152 75C1248 80 1344 70 1392 65L1440 60V120H1392C1344 120 1248 120 1152 120C1056 120 960 120 864 120C768 120 672 120 576 120C480 120 384 120 288 120C192 120 96 120 48 120H0V30Z" 
-                            fill="white"
-                        />
+                    <svg className="w-full h-auto" viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 30L48 35C96 40 192 50 288 55C384 60 480 60 576 55C672 50 768 40 864 45C960 50 1056 70 1152 75C1248 80 1344 70 1392 65L1440 60V120H1392C1344 120 1248 120 1152 120C1056 120 960 120 864 120C768 120 672 120 576 120C480 120 384 120 288 120C192 120 96 120 48 120H0V30Z" 
+                              fill="white"/>
                     </svg>
                 </div>
             </section>
@@ -352,7 +369,7 @@ export default function LandingPage() {
                     </div>
                 ) : (
                     <motion.button 
-                        className="group relative bg-gradient-to-r from-[#6366F1] to-[#4F46E5] 
+                        className="group relative bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-700
                                  p-4 md:p-6 rounded-full shadow-2xl hover:shadow-3xl 
                                  transform hover:scale-110 transition-all duration-200
                                  border-4 border-white overflow-hidden"
@@ -361,7 +378,7 @@ export default function LandingPage() {
                         whileTap={{ scale: 0.95 }}
                     >
                         {/* Hover Effect */}
-                        <div className="absolute inset-0 bg-gradient-to-r from-indigo-400 to-indigo-500 
+                        <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-blue-500 
                                       opacity-0 group-hover:opacity-25 transition-opacity duration-200">
                         </div>
 
