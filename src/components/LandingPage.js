@@ -22,9 +22,9 @@ export default function LandingPage() {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
-            {/* Hero Section - Fixed text visibility */}
-            <section className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 text-white py-24">
+        <div className="min-h-screen bg-gradient-to-b from-gray-50 to-blue-50">
+            {/* Hero Section - Updated colors for better visibility */}
+            <section className="bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-800 text-white py-24">
                 <div className="container mx-auto px-6">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -32,15 +32,15 @@ export default function LandingPage() {
                         transition={{ duration: 0.8 }}
                         className="text-center max-w-4xl mx-auto"
                     >
-                        <h1 className="text-6xl font-bold mb-6 text-white">
+                        <h1 className="text-6xl font-bold mb-6 text-white drop-shadow-lg">
                             Discover Your Perfect Career Path
                         </h1>
-                        <p className="text-2xl mb-10 text-white font-medium">
+                        <p className="text-2xl mb-10 text-white font-medium drop-shadow">
                             Let AI guide you to your dream career with personalized learning paths
                         </p>
                         <button 
-                            className="bg-white text-indigo-600 px-10 py-4 rounded-full font-bold text-lg
-                                     hover:bg-indigo-50 transition-all shadow-xl hover:shadow-2xl
+                            className="bg-white text-blue-700 px-10 py-4 rounded-full font-bold text-lg
+                                     hover:bg-blue-50 transition-all shadow-xl hover:shadow-2xl
                                      transform hover:scale-105 duration-200"
                             onClick={() => setShowChatbot(true)}
                         >
@@ -50,26 +50,26 @@ export default function LandingPage() {
                 </div>
             </section>
 
-            {/* Career Path Section - Improved text contrast */}
+            {/* Career Path Section - Updated colors */}
             {predictedRole && (
-                <section className="py-20 container mx-auto px-6">
-                    <h2 className="text-4xl font-bold mb-12 text-center text-gray-800">Your Career Roadmap</h2>
+                <section className="py-20 container mx-auto px-6 bg-white bg-opacity-90 rounded-3xl my-10 mx-4 shadow-xl">
+                    <h2 className="text-4xl font-bold mb-12 text-center text-blue-900">Your Career Roadmap</h2>
                     <div className="grid md:grid-cols-2 gap-12">
                         {/* Skills Required Card */}
                         <motion.div 
-                            className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow"
+                            className="bg-blue-50 p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow"
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                         >
-                            <h3 className="text-2xl font-bold mb-6 text-indigo-700">Required Skills</h3>
+                            <h3 className="text-2xl font-bold mb-6 text-blue-900">Required Skills</h3>
                             <div className="space-y-6">
                                 {sampleCareerPath.skills.map((skill, index) => (
                                     <div key={index} 
                                         className="flex justify-between items-center p-4 rounded-lg 
-                                                 bg-gray-50 hover:bg-indigo-50 transition-colors"
+                                                 bg-white hover:bg-blue-100 transition-colors"
                                     >
-                                        <span className="font-semibold text-gray-900">{skill.name}</span>
-                                        <span className="text-indigo-700 font-semibold">{skill.duration}</span>
+                                        <span className="font-semibold text-blue-900">{skill.name}</span>
+                                        <span className="text-blue-700 font-semibold">{skill.duration}</span>
                                     </div>
                                 ))}
                             </div>
@@ -77,23 +77,23 @@ export default function LandingPage() {
 
                         {/* Learning Path Card */}
                         <motion.div 
-                            className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow"
+                            className="bg-blue-50 p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow"
                             initial={{ opacity: 0, x: 20 }}
                             animate={{ opacity: 1, x: 0 }}
                         >
-                            <h3 className="text-2xl font-bold mb-6 text-indigo-700">Learning Path</h3>
+                            <h3 className="text-2xl font-bold mb-6 text-blue-900">Learning Path</h3>
                             <div className="space-y-8">
                                 {sampleCareerPath.learningPath.map((phase, index) => (
                                     <div key={index} 
-                                        className="border-l-4 border-indigo-500 pl-6 py-3
-                                                 hover:border-pink-500 transition-colors bg-gray-50 rounded-r-lg"
+                                        className="border-l-4 border-blue-500 pl-6 py-3
+                                                 hover:border-indigo-500 transition-colors bg-white rounded-r-lg"
                                     >
-                                        <h4 className="font-bold text-xl text-gray-900">{phase.phase}</h4>
-                                        <p className="text-indigo-700 text-sm mt-2 font-semibold">{phase.duration}</p>
+                                        <h4 className="font-bold text-xl text-blue-900">{phase.phase}</h4>
+                                        <p className="text-blue-700 text-sm mt-2 font-semibold">{phase.duration}</p>
                                         <ul className="mt-3 space-y-3">
                                             {phase.topics.map((topic, i) => (
-                                                <li key={i} className="flex items-center text-gray-700 font-medium">
-                                                    <span className="w-3 h-3 bg-pink-500 rounded-full mr-3 flex-shrink-0"></span>
+                                                <li key={i} className="flex items-center text-blue-800 font-medium">
+                                                    <span className="w-3 h-3 bg-indigo-500 rounded-full mr-3 flex-shrink-0"></span>
                                                     {topic}
                                                 </li>
                                             ))}
@@ -106,7 +106,7 @@ export default function LandingPage() {
                 </section>
             )}
 
-            {/* Chatbot - Improved visibility and colors */}
+            {/* Chatbot - Updated colors for better visibility */}
             <motion.div 
                 className="fixed bottom-8 left-8 z-50"
                 initial={false}
@@ -116,9 +116,9 @@ export default function LandingPage() {
                     <div className="relative">
                         <button 
                             className="absolute -top-4 -right-4 bg-white w-12 h-12 rounded-full 
-                                     shadow-lg flex items-center justify-center text-red-500 
+                                     shadow-lg flex items-center justify-center text-blue-600 
                                      hover:text-red-600 hover:bg-red-50 transition-colors
-                                     border-2 border-red-200"
+                                     border-2 border-blue-200"
                             onClick={() => setShowChatbot(false)}
                         >
                             <svg 
@@ -139,7 +139,7 @@ export default function LandingPage() {
                     </div>
                 ) : (
                     <button 
-                        className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white p-8 rounded-full
+                        className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-8 rounded-full
                                  shadow-2xl hover:shadow-3xl transform hover:scale-110 transition-all duration-200
                                  border-4 border-white relative group overflow-hidden"
                         onClick={() => setShowChatbot(true)}
@@ -154,7 +154,7 @@ export default function LandingPage() {
                             fill="white"
                             stroke="currentColor" 
                             viewBox="0 0 24 24" 
-                            strokeWidth={1}
+                            strokeWidth={1.5}
                         >
                             <path 
                                 strokeLinecap="round" 
