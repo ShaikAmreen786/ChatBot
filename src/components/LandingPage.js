@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Chatbot from '../Chatbot';
+import { useNavigate } from 'react-router-dom';
 
 export default function LandingPage() {
     const [predictedRole, setPredictedRole] = useState(null);
     const [showChatbot, setShowChatbot] = useState(false);
+    const navigate = useNavigate();
 
     const sampleCareerPath = {
         role: "Frontend Developer",
@@ -95,8 +97,9 @@ export default function LandingPage() {
                                          transition-all duration-300 min-w-[200px]"
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.98 }}
+                                onClick={() => navigate('/predict')}
                             >
-                                Watch Demo
+                                Predict Role
                                 <svg className="w-5 h-5 ml-2 inline-block transform group-hover:translate-x-1 transition-transform duration-200" 
                                      fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
