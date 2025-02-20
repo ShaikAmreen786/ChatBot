@@ -3,28 +3,47 @@ import { motion } from 'framer-motion';
 
 export default function RolePredictionForm() {
     const [formData, setFormData] = useState({
-        // Academic Percentages
-        ssc_percentage: '',
-        inter_percentage: '',
-        btech_cgpa: '',
-        school_type: 'Private',
-        mini_projects: '',
-        projects: '',
-        core_subject: '',
-        aptitude: '',
-        problem_solving: '',
-        programming: '',
-        abstract_thinking: '',
-        design: '',
-        // Hidden fields with default values
-        first_computer: 'Personal',
-        first_program: 'School',
-        lab_programs: 'Yes',
-        language_known: 'Python',
-        problem_solving_approach: 'Logical',
-        typing_speed: 'Medium',
-        management_or_technical: 'Technical',
+        operating_systems: '',
+        algorithms: '',
+        programming_concepts: '',
+        software_engineering: '',
+        computer_networks: '',
+        electronics: '',
+        computer_architecture: '',
+        mathematics: '',
+        communication_skills: '',
+        hours_working: '',
+        logical_quotient: '',
+        hackathons: '',
+        coding_skills: '',
+        public_speaking: '',
+        can_work_long_time: false,
+        self_learning_capability: false,
+        extra_courses: false,
+        certifications: '',
+        workshops: '',
+        talent_tests: false,
+        olympiads: false,
+        reading_writing_skills: 'excellent',
+        memory_capability: 'excellent',
+        interested_subjects: '',
+        interested_career_area: '',
+        job_or_higher_studies: 'Job',
+        company_type: '',
+        taken_inputs_from_seniors: false,
+        interested_in_games: false,
+        interested_books: 'Technology',
+        expected_salary: '',
+        relationship_status: false,
+        behavior_type: 'stubborn',
+        management_or_technical: 'Management',
+        salary_or_work: 'salary',
+        worker_type: 'hard worker',
+        worked_in_teams: false,
     });
+
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -34,10 +53,78 @@ export default function RolePredictionForm() {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(formData);
-        // Add your form submission logic here
+        setIsLoading(true);
+        setError(null);
+
+        // Create features array in the required order
+        const features = [
+            Number(formData.operating_systems),          // Academic percentage in Operating Systems
+            Number(formData.algorithms),                 // percentage in Algorithms
+            Number(formData.programming_concepts),       // Percentage in Programming Concepts
+            Number(formData.software_engineering),       // Percentage in Software Engineering
+            Number(formData.computer_networks),         // Percentage in Computer Networks
+            Number(formData.electronics),               // Percentage in Electronics Subjects
+            Number(formData.computer_architecture),     // Percentage in Computer Architecture
+            Number(formData.mathematics),               // Percentage in Mathematics
+            Number(formData.communication_skills),      // Percentage in Communication skills
+            Number(formData.hours_working),             // Hours working per day
+            Number(formData.logical_quotient),          // Logical quotient rating
+            Number(formData.hackathons),                // hackathons
+            Number(formData.coding_skills),             // coding skills rating
+            Number(formData.public_speaking),           // public speaking points
+            formData.can_work_long_time ? 1 : 0,       // can work long time before system?
+            formData.self_learning_capability ? 1 : 0,  // self-learning capability?
+            formData.extra_courses ? 1 : 0,             // Extra-courses did
+            Number(formData.certifications),            // certifications
+            Number(formData.workshops),                 // workshops
+            formData.talent_tests ? 1 : 0,              // talenttests taken?
+            formData.olympiads ? 1 : 0,                 // olympiads
+            formData.reading_writing_skills === 'excellent' ? 2 : 1, // reading and writing skills
+            formData.memory_capability === 'excellent' ? 2 : 1,     // memory capability score
+            formData.interested_subjects === 'Web Services' ? 1 : 0, // Interested subjects
+            formData.interested_career_area === 'Web Development' ? 1 : 0, // interested career area
+            formData.job_or_higher_studies === 'Job' ? 1 : 0,      // Job/Higher Studies?
+            formData.company_type === 'Web Services' ? 1 : 0,      // Type of company
+            formData.taken_inputs_from_seniors ? 1 : 0,            // Taken inputs from seniors
+            formData.interested_in_games ? 1 : 0,                  // interested in games
+            formData.interested_books === 'Technology' ? 2 : 1,    // Interested Type of Books
+            Number(formData.expected_salary),                      // Salary Range Expected
+            formData.relationship_status ? 1 : 0,                  // In a Relationship?
+            formData.behavior_type === 'stubborn' ? 2 : 1,        // Gentle or Tuff behaviour?
+            formData.management_or_technical === 'Management' ? 1 : 0, // Management or Technical
+            formData.salary_or_work === 'salary' ? 1 : 0,         // Salary/work
+            formData.worker_type === 'hard worker' ? 1 : 0,       // hard/smart worker
+            formData.worked_in_teams ? 1 : 0,                     // worked in teams ever?
+            0                                                      // Introvert (hardcoded as per requirement)
+        ];
+
+        try {
+            const response = await fetch('http://127.0.0.1:5000/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    features: features
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const result = await response.json();
+            console.log('Prediction result:', result);
+            // Handle the prediction result here
+            
+        } catch (error) {
+            console.error('Error submitting form:', error);
+            setError('Error submitting form. Please try again.');
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -341,15 +428,24 @@ export default function RolePredictionForm() {
                     {/* Submit Button */}
                     <motion.button
                         type="submit"
+                        disabled={isLoading}
                         className="w-full bg-gradient-to-br from-purple-600 via-indigo-600 to-blue-700 
                                  text-white py-4 px-6 rounded-lg font-semibold shadow-lg 
-                                 hover:shadow-xl transition-all duration-200"
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
+                                 hover:shadow-xl transition-all duration-200
+                                 disabled:opacity-50 disabled:cursor-not-allowed"
+                        whileHover={{ scale: isLoading ? 1 : 1.02 }}
+                        whileTap={{ scale: isLoading ? 1 : 0.98 }}
                     >
-                        Predict Career Path
+                        {isLoading ? 'Predicting...' : 'Predict Career Path'}
                     </motion.button>
                 </form>
+
+                {/* Show error message if there is one */}
+                {error && (
+                    <div className="text-red-500 text-center mt-4">
+                        {error}
+                    </div>
+                )}
             </motion.div>
         </div>
     );
