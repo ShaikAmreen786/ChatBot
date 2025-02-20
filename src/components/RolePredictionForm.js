@@ -40,6 +40,10 @@ export default function RolePredictionForm() {
         salary_or_work: 'salary',
         worker_type: 'hard worker',
         worked_in_teams: false,
+        ssc_percentage: '',
+        inter_percentage: '',
+        btech_cgpa: '',
+        school_type: 'Private',
     });
 
     const [isLoading, setIsLoading] = useState(false);
@@ -144,20 +148,90 @@ export default function RolePredictionForm() {
                 </h1>
 
                 <form onSubmit={handleSubmit} className="space-y-8">
+                    {/* Academic Information */}
+                    <div className="space-y-4">
+                        <h2 className="text-xl font-semibold text-gray-700 mb-4">Academic Information</h2>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    SSC Percentage
+                                </label>
+                                <input
+                                    type="number"
+                                    name="ssc_percentage"
+                                    value={formData.ssc_percentage}
+                                    onChange={handleChange}
+                                    className="w-full p-3 border border-gray-300 rounded-lg"
+                                    min="0"
+                                    max="100"
+                                    step="0.01"
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Inter Percentage
+                                </label>
+                                <input
+                                    type="number"
+                                    name="inter_percentage"
+                                    value={formData.inter_percentage}
+                                    onChange={handleChange}
+                                    className="w-full p-3 border border-gray-300 rounded-lg"
+                                    min="0"
+                                    max="100"
+                                    step="0.01"
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    BTech CGPA
+                                </label>
+                                <input
+                                    type="number"
+                                    name="btech_cgpa"
+                                    value={formData.btech_cgpa}
+                                    onChange={handleChange}
+                                    className="w-full p-3 border border-gray-300 rounded-lg"
+                                    min="0"
+                                    max="10"
+                                    step="0.01"
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    School Type
+                                </label>
+                                <select
+                                    name="school_type"
+                                    value={formData.school_type}
+                                    onChange={handleChange}
+                                    className="w-full p-3 border border-gray-300 rounded-lg"
+                                    required
+                                >
+                                    <option value="Private">Private</option>
+                                    <option value="Government">Government</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
                     {/* Subject Percentages */}
                     <div className="space-y-4">
                         <h2 className="text-xl font-semibold text-gray-700 mb-4">Subject Percentages</h2>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                             {[
-                                { name: 'operating_systems', label: 'Operating Systems' },
-                                { name: 'algorithms', label: 'Algorithms' },
-                                { name: 'programming_concepts', label: 'Programming Concepts' },
-                                { name: 'software_engineering', label: 'Software Engineering' },
-                                { name: 'computer_networks', label: 'Computer Networks' },
-                                { name: 'electronics', label: 'Electronics' },
-                                { name: 'computer_architecture', label: 'Computer Architecture' },
-                                { name: 'mathematics', label: 'Mathematics' },
-                                { name: 'communication_skills', label: 'Communication Skills' }
+                                { name: 'operating_systems', label: 'Operating Systems (%)' },
+                                { name: 'algorithms', label: 'Algorithms (%)' },
+                                { name: 'programming_concepts', label: 'Programming Concepts (%)' },
+                                { name: 'software_engineering', label: 'Software Engineering (%)' },
+                                { name: 'computer_networks', label: 'Computer Networks (%)' },
+                                { name: 'electronics', label: 'Electronics (%)' },
+                                { name: 'computer_architecture', label: 'Computer Architecture (%)' },
+                                { name: 'mathematics', label: 'Mathematics (%)' },
+                                { name: 'communication_skills', label: 'Communication Skills (%)' }
                             ].map((subject) => (
                                 <div key={subject.name}>
                                     <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -184,9 +258,9 @@ export default function RolePredictionForm() {
                         <h2 className="text-xl font-semibold text-gray-700 mb-4">Skills and Ratings</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {[
-                                { name: 'logical_quotient', label: 'Logical Quotient Rating' },
-                                { name: 'coding_skills', label: 'Coding Skills Rating' },
-                                { name: 'public_speaking', label: 'Public Speaking Points' }
+                                { name: 'logical_quotient', label: 'Logical Quotient Rating (0-10)' },
+                                { name: 'coding_skills', label: 'Coding Skills Rating (0-10)' },
+                                { name: 'public_speaking', label: 'Public Speaking Points (0-10)' }
                             ].map((skill) => (
                                 <div key={skill.name}>
                                     <label className="block text-sm font-medium text-gray-700 mb-1">
