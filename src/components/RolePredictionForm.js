@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function RolePredictionForm() {
     const [formData, setFormData] = useState({
@@ -44,6 +44,8 @@ export default function RolePredictionForm() {
 
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [predictionResult, setPredictionResult] = useState(null);
+    const [showModal, setShowModal] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -106,6 +108,7 @@ export default function RolePredictionForm() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
+                mode: 'cors',
                 body: JSON.stringify({
                     features: features
                 })
@@ -117,7 +120,8 @@ export default function RolePredictionForm() {
 
             const result = await response.json();
             console.log('Prediction result:', result);
-            // Handle the prediction result here
+            setPredictionResult(result);
+            setShowModal(true);
             
         } catch (error) {
             console.error('Error submitting form:', error);
@@ -140,143 +144,10 @@ export default function RolePredictionForm() {
                 </h1>
 
                 <form onSubmit={handleSubmit} className="space-y-8">
-                    {/* Basic Academic Information */}
+                    {/* Subject Percentages */}
                     <div className="space-y-4">
-                        <h2 className="text-xl font-semibold text-gray-700 mb-4">Basic Academic Information</h2>
+                        <h2 className="text-xl font-semibold text-gray-700 mb-4">Subject Percentages</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">
-                                    SSC Percentage
-                                </label>
-                                <input
-                                    type="number"
-                                    name="ssc_percentage"
-                                    value={formData.ssc_percentage}
-                                    onChange={handleChange}
-                                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                    placeholder="Enter SSC percentage"
-                                    min="0"
-                                    max="100"
-                                    required
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">
-                                    Inter Percentage
-                                </label>
-                                <input
-                                    type="number"
-                                    name="inter_percentage"
-                                    value={formData.inter_percentage}
-                                    onChange={handleChange}
-                                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                    placeholder="Enter Inter percentage"
-                                    min="0"
-                                    max="100"
-                                    required
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">
-                                    BTech CGPA
-                                </label>
-                                <input
-                                    type="number"
-                                    name="btech_cgpa"
-                                    value={formData.btech_cgpa}
-                                    onChange={handleChange}
-                                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                    placeholder="Enter CGPA"
-                                    min="0"
-                                    max="10"
-                                    step="0.01"
-                                    required
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">
-                                    School Type
-                                </label>
-                                <select
-                                    name="school_type"
-                                    value={formData.school_type}
-                                    onChange={handleChange}
-                                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                    required
-                                >
-                                    <option value="Private">Private</option>
-                                    <option value="Government">Government</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">
-                                    Number of Mini Projects
-                                </label>
-                                <input
-                                    type="number"
-                                    name="mini_projects"
-                                    value={formData.mini_projects}
-                                    onChange={handleChange}
-                                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                    placeholder="Enter number of mini projects"
-                                    min="0"
-                                    required
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">
-                                    Number of Projects
-                                </label>
-                                <input
-                                    type="number"
-                                    name="projects"
-                                    value={formData.projects}
-                                    onChange={handleChange}
-                                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                    placeholder="Enter number of projects"
-                                    min="0"
-                                    required
-                                />
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Skills Rating */}
-                    <div className="space-y-4">
-                        <h2 className="text-xl font-semibold text-gray-700 mb-4">Skills Rating (1-10)</h2>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            {[
-                                { name: 'core_subject', label: 'Core Subject' },
-                                { name: 'aptitude', label: 'Aptitude' },
-                                { name: 'problem_solving', label: 'Problem Solving' },
-                                { name: 'programming', label: 'Programming' },
-                                { name: 'abstract_thinking', label: 'Abstract Thinking' },
-                                { name: 'design', label: 'Design' }
-                            ].map((skill) => (
-                                <div key={skill.name}>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                                        {skill.label}
-                                    </label>
-                                    <input
-                                        type="number"
-                                        name={skill.name}
-                                        value={formData[skill.name]}
-                                        onChange={handleChange}
-                                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                        placeholder="Rate 1-10"
-                                        min="1"
-                                        max="10"
-                                        required
-                                    />
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* Academic Information */}
-                    <div className="space-y-4">
-                        <h2 className="text-xl font-semibold text-gray-700 mb-4">Academic Information</h2>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                             {[
                                 { name: 'operating_systems', label: 'Operating Systems' },
                                 { name: 'algorithms', label: 'Algorithms' },
@@ -290,15 +161,15 @@ export default function RolePredictionForm() {
                             ].map((subject) => (
                                 <div key={subject.name}>
                                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                                        {subject.label} (%)
+                                        {subject.label}
                                     </label>
                                     <input
                                         type="number"
                                         name={subject.name}
                                         value={formData[subject.name]}
                                         onChange={handleChange}
-                                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                        placeholder="Enter percentage"
+                                        className="w-full p-3 border border-gray-300 rounded-lg"
+                                        placeholder={`Enter ${subject.label} percentage`}
                                         min="0"
                                         max="100"
                                         required
@@ -308,55 +179,108 @@ export default function RolePredictionForm() {
                         </div>
                     </div>
 
-                    {/* Personal and Career Information */}
+                    {/* Skills and Ratings */}
                     <div className="space-y-4">
-                        <h2 className="text-xl font-semibold text-gray-700 mb-4">Personal & Career Information</h2>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div className="space-y-4">
-                                <div>
+                        <h2 className="text-xl font-semibold text-gray-700 mb-4">Skills and Ratings</h2>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            {[
+                                { name: 'logical_quotient', label: 'Logical Quotient Rating' },
+                                { name: 'coding_skills', label: 'Coding Skills Rating' },
+                                { name: 'public_speaking', label: 'Public Speaking Points' }
+                            ].map((skill) => (
+                                <div key={skill.name}>
                                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                                        Hours Working Per Day
+                                        {skill.label}
                                     </label>
                                     <input
                                         type="number"
-                                        name="hours_working"
-                                        value={formData.hours_working}
+                                        name={skill.name}
+                                        value={formData[skill.name]}
                                         onChange={handleChange}
                                         className="w-full p-3 border border-gray-300 rounded-lg"
+                                        placeholder={`Enter ${skill.label}`}
                                         min="0"
-                                        max="24"
+                                        max="10"
                                         required
                                     />
                                 </div>
-                                {/* Add more number inputs here */}
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Activities and Experience */}
+                    <div className="space-y-4">
+                        <h2 className="text-xl font-semibold text-gray-700 mb-4">Activities and Experience</h2>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Hours Working Per Day
+                                </label>
+                                <input
+                                    type="number"
+                                    name="hours_working"
+                                    value={formData.hours_working}
+                                    onChange={handleChange}
+                                    className="w-full p-3 border border-gray-300 rounded-lg"
+                                    placeholder="Enter working hours"
+                                    min="0"
+                                    max="24"
+                                    required
+                                />
                             </div>
-                            <div className="space-y-4">
-                                {/* Checkboxes */}
-                                {[
-                                    { name: 'can_work_long_time', label: 'Can work long time before system?' },
-                                    { name: 'self_learning_capability', label: 'Self-learning capability?' },
-                                    { name: 'talent_tests', label: 'Talent tests taken?' },
-                                    { name: 'olympiads', label: 'Participated in Olympiads?' }
-                                ].map((checkbox) => (
-                                    <div key={checkbox.name} className="flex items-center">
-                                        <input
-                                            type="checkbox"
-                                            name={checkbox.name}
-                                            checked={formData[checkbox.name]}
-                                            onChange={(e) => handleChange({
-                                                target: {
-                                                    name: checkbox.name,
-                                                    value: e.target.checked
-                                                }
-                                            })}
-                                            className="h-4 w-4 text-blue-600 rounded"
-                                        />
-                                        <label className="ml-2 text-sm text-gray-700">
-                                            {checkbox.label}
-                                        </label>
-                                    </div>
-                                ))}
-                            </div>
+                            {[
+                                { name: 'hackathons', label: 'Number of Hackathons' },
+                                { name: 'certifications', label: 'Number of Certifications' },
+                                { name: 'workshops', label: 'Number of Workshops' }
+                            ].map((activity) => (
+                                <div key={activity.name}>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                                        {activity.label}
+                                    </label>
+                                    <input
+                                        type="number"
+                                        name={activity.name}
+                                        value={formData[activity.name]}
+                                        onChange={handleChange}
+                                        className="w-full p-3 border border-gray-300 rounded-lg"
+                                        placeholder={`Enter number`}
+                                        min="0"
+                                        required
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Checkboxes */}
+                    <div className="space-y-4">
+                        <h2 className="text-xl font-semibold text-gray-700 mb-4">Additional Information</h2>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            {[
+                                { name: 'can_work_long_time', label: 'Can work for long time?' },
+                                { name: 'self_learning_capability', label: 'Self-learning capability?' },
+                                { name: 'extra_courses', label: 'Taken extra courses?' },
+                                { name: 'talent_tests', label: 'Taken talent tests?' },
+                                { name: 'olympiads', label: 'Participated in Olympiads?' }
+                            ].map((checkbox) => (
+                                <div key={checkbox.name} className="flex items-center">
+                                    <input
+                                        type="checkbox"
+                                        name={checkbox.name}
+                                        checked={formData[checkbox.name]}
+                                        onChange={(e) => handleChange({
+                                            target: {
+                                                name: checkbox.name,
+                                                value: e.target.checked
+                                            }
+                                        })}
+                                        className="h-4 w-4 text-blue-600 rounded"
+                                    />
+                                    <label className="ml-2 text-sm text-gray-700">
+                                        {checkbox.label}
+                                    </label>
+                                </div>
+                            ))}
                         </div>
                     </div>
 
@@ -447,6 +371,73 @@ export default function RolePredictionForm() {
                     </div>
                 )}
             </motion.div>
+
+            {/* Prediction Result Modal */}
+            <AnimatePresence>
+                {showModal && (
+                    <>
+                        {/* Overlay */}
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            className="fixed inset-0 bg-black bg-opacity-50 z-40"
+                            onClick={() => setShowModal(false)}
+                        />
+
+                        {/* Modal */}
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.8, y: 20 }}
+                            className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
+                                     bg-white rounded-xl shadow-2xl p-8 max-w-lg w-full mx-4 z-50"
+                        >
+                            <div className="relative">
+                                {/* Close button */}
+                                <button
+                                    onClick={() => setShowModal(false)}
+                                    className="absolute top-0 right-0 text-gray-400 hover:text-gray-600"
+                                >
+                                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+
+                                {/* Modal content */}
+                                <h2 className="text-2xl font-bold text-gray-800 mb-4">
+                                    Prediction Result
+                                </h2>
+                                <div className="space-y-4">
+                                    {predictionResult && (
+                                        <div className="bg-gradient-to-r from-purple-50 to-blue-50 p-6 rounded-lg">
+                                            <p className="text-lg font-semibold text-gray-800">
+                                                Predicted Role: {predictionResult.prediction}
+                                            </p>
+                                            {/* <p className="text-gray-600 mt-2">
+                                                Confidence Score: {predictionResult.confidence}%
+                                            </p> */}
+                                            {/* Add more result details as needed */}
+                                        </div>
+                                    )}
+                                </div>
+
+                                {/* Close button */}
+                                <motion.button
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    onClick={() => setShowModal(false)}
+                                    className="mt-6 w-full bg-gradient-to-r from-purple-600 to-blue-600 
+                                             text-white py-3 px-6 rounded-lg font-semibold shadow-lg 
+                                             hover:shadow-xl transition-all duration-200"
+                                >
+                                    Close
+                                </motion.button>
+                            </div>
+                        </motion.div>
+                    </>
+                )}
+            </AnimatePresence>
         </div>
     );
 } 
