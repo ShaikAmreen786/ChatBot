@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 export default function RolePredictionForm() {
     const [formData, setFormData] = useState({
@@ -50,6 +51,8 @@ export default function RolePredictionForm() {
     const [error, setError] = useState(null);
     const [predictionResult, setPredictionResult] = useState(null);
     const [showModal, setShowModal] = useState(false);
+
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -126,7 +129,10 @@ export default function RolePredictionForm() {
             console.log('Prediction result:', result);
             setPredictionResult(result);
             setShowModal(true);
-            
+
+            // Navigate to SkillsRoadmap page with prediction result
+            navigate('/skills-roadmap', { state: { predictionResult: result } });
+
         } catch (error) {
             console.error('Error submitting form:', error);
             setError('Error submitting form. Please try again.');
