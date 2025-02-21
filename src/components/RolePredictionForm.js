@@ -90,22 +90,22 @@ export default function RolePredictionForm() {
             Number(formData.workshops),                 // workshops
             formData.talent_tests ? 1 : 0,              // talenttests taken?
             formData.olympiads ? 1 : 0,                 // olympiads
-            formData.reading_writing_skills === 'excellent' ? 2 : 1, // reading and writing skills
-            formData.memory_capability === 'excellent' ? 2 : 1,     // memory capability score
-            formData.interested_subjects === 'Web Services' ? 1 : 0, // Interested subjects
-            formData.interested_career_area === 'Web Development' ? 1 : 0, // interested career area
-            formData.job_or_higher_studies === 'Job' ? 1 : 0,      // Job/Higher Studies?
-            formData.company_type === 'Web Services' ? 1 : 0,      // Type of company
+            formData.reading_writing_skills === 2, // reading and writing skills
+            formData.memory_capability === 2,     // memory capability score
+            formData.interested_subjects, // Interested subjects
+            formData.interested_career_area, // interested career area
+            formData.job_or_higher_studies,      // Job/Higher Studies?
+            formData.company_type === 1,      // Type of company
             formData.taken_inputs_from_seniors ? 1 : 0,            // Taken inputs from seniors
             formData.interested_in_games ? 1 : 0,                  // interested in games
-            formData.interested_books === 'Technology' ? 2 : 1,    // Interested Type of Books
+            formData.interested_books === 2,    // Interested Type of Books
             Number(formData.expected_salary),                      // Salary Range Expected
             formData.relationship_status ? 1 : 0,                  // In a Relationship?
-            formData.behavior_type === 'stubborn' ? 2 : 1,        // Gentle or Tuff behaviour?
+            formData.behavior_type === 2,        // Gentle or Tuff behaviour?
             formData.management_or_technical === 'Management' ? 1 : 0, // Management or Technical
-            formData.salary_or_work === 'salary' ? 1 : 0,         // Salary/work
-            formData.worker_type === 'hard worker' ? 1 : 0,       // hard/smart worker
-            formData.worked_in_teams ? 1 : 0,                     // worked in teams ever?
+            formData.salary_or_work === 1,         // Salary/work
+            formData.worker_type === 1,       // hard/smart worker
+            formData.worked_in_teams === 1,                     // worked in teams ever?
             0                                                      // Introvert (hardcoded as per requirement)
         ];
 
