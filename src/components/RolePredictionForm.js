@@ -366,14 +366,21 @@ export default function RolePredictionForm() {
                                 <label className="block text-sm font-medium text-gray-700 mb-1">
                                     Interested Career Area
                                 </label>
-                                <input
-                                    type="text"
+                                <select
                                     name="interested_career_area"
                                     value={formData.interested_career_area}
                                     onChange={handleChange}
                                     className="w-full p-3 border border-gray-300 rounded-lg"
                                     required
-                                />
+                                >
+                                    <option value="">Select Career Area</option>
+                                    <option value="0">System Developer</option>
+                                    <option value="1">Business Process Analyst</option>
+                                    <option value="2">Developer</option>
+                                    <option value="3">Testing</option>
+                                    <option value="4">Security</option>
+                                    <option value="5">Cloud Computing</option>
+                                </select>
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">
