@@ -110,7 +110,7 @@ export default function RolePredictionForm() {
         ];
 
         try {
-            const response = await fetch('https://598f-117-192-9-243.ngrok-free.app/predict', {
+            const response = await fetch('https://0409-152-58-233-244.ngrok-free.app/predict', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
