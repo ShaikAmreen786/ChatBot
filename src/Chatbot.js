@@ -36,6 +36,11 @@ export default function Chatbot() {
         }
     };
     
+    const handleKeyDown = (event) => {
+        if (event.key === "Enter") {
+            sendMessage();
+        }
+    };
 
     const uploadResume = async () => {
         if (!file) return;
@@ -101,6 +106,7 @@ export default function Chatbot() {
                     className="flex-1 p-3 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" 
                     value={input} 
                     onChange={(e) => setInput(e.target.value)} 
+                    onKeyDown={handleKeyDown}
                     placeholder="Ask about your career..." 
                 />
                 <motion.button 
@@ -109,7 +115,7 @@ export default function Chatbot() {
                     whileHover={{ scale: 1.1 }}
                 >Send</motion.button>
             </div>
-            <div className="mt-4 flex flex-col items-center gap-2">
+            {/* <div className="mt-4 flex flex-col items-center gap-2">
                 <input 
                     type="file" 
                     className="p-2 border rounded-lg shadow-sm cursor-pointer bg-gray-50" 
@@ -120,7 +126,7 @@ export default function Chatbot() {
                     onClick={uploadResume}
                     whileHover={{ scale: 1.1 }}
                 >Upload Resume</motion.button>
-            </div>
+            </div> */}
         </motion.div>
     );
 }
