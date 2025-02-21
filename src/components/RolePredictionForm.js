@@ -92,9 +92,9 @@ export default function RolePredictionForm() {
             formData.olympiads ? 1 : 0,                 // olympiads
             formData.reading_writing_skills === 2, // reading and writing skills
             formData.memory_capability === 2,     // memory capability score
-            formData.interested_subjects, // Interested subjects
-            formData.interested_career_area, // interested career area
-            formData.job_or_higher_studies,      // Job/Higher Studies?
+            Number(formData.interested_subjects), // Interested subjects
+            Number(formData.interested_career_area), // interested career area
+            Number(formData.job_or_higher_studies),      // Job/Higher Studies?
             formData.company_type === 1,      // Type of company
             formData.taken_inputs_from_seniors ? 1 : 0,            // Taken inputs from seniors
             formData.interested_in_games ? 1 : 0,                  // interested in games
