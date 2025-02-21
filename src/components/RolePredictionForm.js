@@ -423,6 +423,7 @@ export default function RolePredictionForm() {
                                     className="w-full p-3 border border-gray-300 rounded-lg"
                                     required
                                 >
+                                    <option value="0">Select Option</option>
                                     <option value="1">Job</option>
                                     <option value="0">Higher Studies</option>
                                 </select>
