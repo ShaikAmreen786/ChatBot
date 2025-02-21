@@ -97,10 +97,10 @@ export default function RolePredictionForm() {
             Number(formData.job_or_higher_studies),      // Job/Higher Studies?
             formData.company_type === 1,      // Type of company
             formData.taken_inputs_from_seniors ? 1 : 0,            // Taken inputs from seniors
-            formData.interested_in_games ? 1 : 0,                  // interested in games
+            formData.interested_in_games === 0,                  // interested in games
             formData.interested_books === 2,    // Interested Type of Books
             Number(formData.expected_salary),                      // Salary Range Expected
-            formData.relationship_status ? 1 : 0,                  // In a Relationship?
+            formData.relationship_status === 0,                  // In a Relationship?
             formData.behavior_type === 2,        // Gentle or Tuff behaviour?
             formData.management_or_technical === 'Management' ? 1 : 0, // Management or Technical
             formData.salary_or_work === 1,         // Salary/work
