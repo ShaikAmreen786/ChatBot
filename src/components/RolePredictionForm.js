@@ -32,7 +32,7 @@ export default function RolePredictionForm() {
         company_type: '',
         taken_inputs_from_seniors: false,
         interested_in_games: false,
-        interested_books: 'Technology',
+        interested_books: '',
         expected_salary: '',
         relationship_status: false,
         behavior_type: 'stubborn',
@@ -364,6 +364,30 @@ export default function RolePredictionForm() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Interested Subjects
+                                </label>
+                                <select
+                                    name="interested_subjects"
+                                    value={formData.interested_subjects}
+                                    onChange={handleChange}
+                                    className="w-full p-3 border border-gray-300 rounded-lg"
+                                    required
+                                >
+                                    <option value="">Select Subject</option>
+                                    <option value="0">Cloud Computing</option>
+                                    <option value="1">Networks</option>
+                                    <option value="2">Hacking</option>
+                                    <option value="3">Computer Architecture</option>
+                                    <option value="4">Programming</option>
+                                    <option value="5">Parallel Computing</option>
+                                    <option value="6">IOT</option>
+                                    <option value="7">Data Engineering</option>
+                                    <option value="8">Software Engineering</option>
+                                    <option value="9">Management</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
                                     Interested Career Area
                                 </label>
                                 <select
@@ -395,6 +419,53 @@ export default function RolePredictionForm() {
                                 >
                                     <option value="Job">Job</option>
                                     <option value="Higher Studies">Higher Studies</option>
+                                </select>
+                            </div>
+
+                            {/* Interested Books */}
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Interested Type of Books
+                                </label>
+                                <select
+                                    name="interested_books"
+                                    value={formData.interested_books}
+                                    onChange={handleChange}
+                                    className="w-full p-3 border border-gray-300 rounded-lg"
+                                    required
+                                >
+                                    <option value="">Select Book Type</option>
+                                    <option value="0">Prayer Books</option>
+                                    <option value="1">Children's</option>
+                                    <option value="2">Travel</option>
+                                    <option value="3">Romance</option>
+                                    <option value="4">Cookbooks</option>
+                                    <option value="5">Self help</option>
+                                    <option value="6">Drama</option>
+                                    <option value="7">Math</option>
+                                    <option value="8">Religion & Spirituality</option>
+                                    <option value="9">Anthology</option>
+                                    <option value="10">Trilogy</option>
+                                    <option value="11">Autobiographies</option>
+                                    <option value="12">Mystery</option>
+                                    <option value="13">Diaries</option>
+                                    <option value="14">Journals</option>
+                                    <option value="15">History</option>
+                                    <option value="16">Art</option>
+                                    <option value="17">Dictionaries</option>
+                                    <option value="18">Horror</option>
+                                    <option value="19">Encyclopedias</option>
+                                    <option value="20">Action and Adventure</option>
+                                    <option value="21">Fantasy</option>
+                                    <option value="22">Comics</option>
+                                    <option value="23">Science Fiction</option>
+                                    <option value="24">Series</option>
+                                    <option value="25">Guide</option>
+                                    <option value="26">Biographies</option>
+                                    <option value="27">Health</option>
+                                    <option value="28">Satire</option>
+                                    <option value="29">Science</option>
+                                    <option value="30">Poetry</option>
                                 </select>
                             </div>
                         </div>
