@@ -6,6 +6,7 @@ export default function Chatbot() {
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState("");
     const [file, setFile] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const sendMessage = async () => {
         if (!input.trim()) return;
@@ -13,6 +14,7 @@ export default function Chatbot() {
         const newMessages = [...messages, { sender: "user", text: input }];
         setMessages(newMessages);
         setInput("");
+        setLoading(true);
         
         try {
             const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=AIzaSyAmKVxPUm2AZMILup0Y_JeNsO5YXEtlyUo", {
@@ -29,6 +31,8 @@ export default function Chatbot() {
             setMessages([...newMessages, { sender: "bot", text: reply }]);
         } catch (error) {
             setMessages([...newMessages, { sender: "bot", text: "Error: Unable to connect to Gemini AI." }]);
+        } finally {
+            setLoading(false);
         }
     };
     
@@ -78,10 +82,18 @@ export default function Chatbot() {
                         initial={{ scale: 0.9 }} 
                         animate={{ scale: 1 }}
                     >
-                        {/* {msg.text} */}
                         <ReactMarkdown>{msg.text}</ReactMarkdown> {/* Renders Markdown */}
                     </motion.div>
                 ))}
+                {loading && (
+                    <div className="chat-message loading">
+                        <div className="loader">
+                            <span className="dot"></span>
+                            <span className="dot"></span>
+                            <span className="dot"></span>
+                        </div>
+                    </div>
+                )}
             </div>
             <div className="flex mt-4 gap-2">
                 <input 
