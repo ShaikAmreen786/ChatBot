@@ -309,9 +309,7 @@ export default function RolePredictionForm() {
                                 />
                             </div>
                             {[
-                                { name: 'hackathons', label: 'Number of Hackathons' },
-                                { name: 'certifications', label: 'Number of Certifications' },
-                                { name: 'workshops', label: 'Number of Workshops' }
+                                { name: 'hackathons', label: 'Number of Hackathons' }
                             ].map((activity) => (
                                 <div key={activity.name}>
                                     <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -329,6 +327,52 @@ export default function RolePredictionForm() {
                                     />
                                 </div>
                             ))}
+                            {/* Workshops Dropdown */}
+                            <div className="space-y-4">
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Workshops
+                                </label>
+                                <select
+                                    name="workshops"
+                                    value={formData.workshops}
+                                    onChange={handleChange}
+                                    className="block w-full p-3 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    required
+                                >
+                                    <option value="">Select a workshop</option>
+                                    <option value="0">Cloud Computing</option>
+                                    <option value="1">Database Security</option>
+                                    <option value="2">Web Technologies</option>
+                                    <option value="3">Data Science</option>
+                                    <option value="4">Testing</option>
+                                    <option value="5">Hacking</option>
+                                    <option value="6">Game Development</option>
+                                    <option value="7">System Designing</option>
+                                </select>
+                            </div>
+                            {/* Certifications Dropdown */}
+                            <div className="space-y-4">
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Certifications
+                                </label>
+                                <select
+                                    name="certifications"
+                                    value={formData.certifications}
+                                    onChange={handleChange}
+                                    className="block w-full p-3 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                >
+                                    <option value="">Select a certification</option>
+                                    <option value="0">Shell Programming</option>
+                                    <option value="1">Machine Learning</option>
+                                    <option value="2">App Development</option>
+                                    <option value="3">Python</option>
+                                    <option value="4">R Programming</option>
+                                    <option value="5">Information Security</option>
+                                    <option value="6">Hadoop</option>
+                                    <option value="7">Distro Making</option>
+                                    <option value="8">Full Stack</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
 
@@ -498,30 +542,6 @@ export default function RolePredictionForm() {
                                 </select>
                             </div>
                         </div>
-                    </div>
-
-                    {/* Certifications Dropdown */}
-                    <div className="space-y-4">
-                        <label className="block text-lg font-semibold text-gray-700" htmlFor="certifications">
-                            Certifications
-                        </label>
-                        <select
-                            name="certifications"
-                            value={formData.certifications}
-                            onChange={handleChange}
-                            className="block w-full p-3 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        >
-                            <option value="">Select a certification</option>
-                            <option value="0">Shell Programming</option>
-                            <option value="1">Machine Learning</option>
-                            <option value="2">App Development</option>
-                            <option value="3">Python</option>
-                            <option value="4">R Programming</option>
-                            <option value="5">Information Security</option>
-                            <option value="6">Hadoop</option>
-                            <option value="7">Distro Making</option>
-                            <option value="8">Full Stack</option>
-                        </select>
                     </div>
 
                     {/* Hidden Fields */}
