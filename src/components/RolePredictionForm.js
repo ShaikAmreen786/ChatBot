@@ -25,8 +25,8 @@ export default function RolePredictionForm() {
         workshops: '',
         talent_tests: false,
         olympiads: false,
-        reading_writing_skills: 'excellent',
-        memory_capability: 'excellent',
+        reading_writing_skills: '',
+        memory_capability: '',
         interested_subjects: '',
         interested_career_area: '',
         job_or_higher_studies: 'Job',
@@ -36,15 +36,15 @@ export default function RolePredictionForm() {
         interested_books: '',
         expected_salary: '',
         relationship_status: false,
-        behavior_type: 'stubborn',
-        management_or_technical: 'Management',
-        salary_or_work: 'salary',
-        worker_type: 'hard worker',
+        behavior_type: '',
+        management_or_technical: '',
+        salary_or_work: '',
+        worker_type: '',
         worked_in_teams: false,
         ssc_percentage: '',
         inter_percentage: '',
         btech_cgpa: '',
-        school_type: 'Private',
+        school_type: '',
     });
 
     const [isLoading, setIsLoading] = useState(false);
@@ -102,7 +102,7 @@ export default function RolePredictionForm() {
             formData.expected_salary === 0,                      // Salary Range Expected
             formData.relationship_status === 0,                  // In a Relationship?
             formData.behavior_type === 2,        // Gentle or Tuff behaviour?
-            formData.management_or_technical === 'Management' ? 1 : 0, // Management or Technical
+            Number(formData.management_or_technical), // Management or Technical
             formData.salary_or_work === 1,         // Salary/work
             formData.worker_type === 1,       // hard/smart worker
             formData.worked_in_teams === 1,                     // worked in teams ever?
@@ -481,7 +481,7 @@ export default function RolePredictionForm() {
                                     className="w-full p-3 border border-gray-300 rounded-lg"
                                     required
                                 >
-                                    <option value="0">Select Option</option>
+                                    <option value="">Select Option</option>
                                     <option value="1">Job</option>
                                     <option value="0">Higher Studies</option>
                                 </select>
@@ -551,8 +551,9 @@ export default function RolePredictionForm() {
                                     className="w-full p-3 border border-gray-300 rounded-lg"
                                     required
                                 >
-                                    <option value="Management">Management</option>
-                                    <option value="Technical">Technical</option>
+                                    <option value="">Select Option</option>
+                                    <option value="0">Management</option>
+                                    <option value="1">Technical</option>
                                 </select>
                             </div>
                         </div>
