@@ -97,9 +97,9 @@ export default function RolePredictionForm() {
             Number(formData.job_or_higher_studies),      // Job/Higher Studies?
             formData.company_type === 1,      // Type of company
             formData.taken_inputs_from_seniors ? 1 : 0,            // Taken inputs from seniors
-            formData.interested_in_games === 0,                  // interested in games
+            formData.interested_in_games ? 1 : 0,                  // interested in games
             formData.interested_books === 2,    // Interested Type of Books
-            Number(formData.expected_salary),                      // Salary Range Expected
+            formData.expected_salary === 0,                      // Salary Range Expected
             formData.relationship_status === 0,                  // In a Relationship?
             formData.behavior_type === 2,        // Gentle or Tuff behaviour?
             formData.management_or_technical === 'Management' ? 1 : 0, // Management or Technical
@@ -385,7 +385,9 @@ export default function RolePredictionForm() {
                                 { name: 'self_learning_capability', label: 'Self-learning capability?' },
                                 { name: 'extra_courses', label: 'Taken extra courses?' },
                                 { name: 'talent_tests', label: 'Taken talent tests?' },
-                                { name: 'olympiads', label: 'Participated in Olympiads?' }
+                                { name: 'olympiads', label: 'Participated in Olympiads?' },
+                                { name: 'taken_inputs_from_seniors', label: 'Taken inputs from seniors or elders' },
+                                { name: 'interested_in_games', label: 'Interested in games?' },
                             ].map((checkbox) => (
                                 <div key={checkbox.name} className="flex items-center">
                                     <input
