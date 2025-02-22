@@ -371,6 +371,18 @@ export default function RolePredictionForm() {
                                     <option value="6">Hadoop</option>
                                     <option value="7">Distro Making</option>
                                     <option value="8">Full Stack</option>
+                                    <option value="9">Python</option>
+                                    <option value="10">Java</option>
+                                    <option value="11">JavaScript</option>
+                                    <option value="12">C++</option>
+                                    <option value="13">C#</option>
+                                    <option value="14">Ruby</option>
+                                    <option value="15">PHP</option>
+                                    <option value="16">SQL</option>
+                                    <option value="17">MongoDB</option>
+                                    <option value="18">PostgreSQL</option>
+                                    <option value="19">Oracle DB</option>
+                                    <option value="20">Microsoft SQL Server</option>
                                 </select>
                             </div>
                         </div>
