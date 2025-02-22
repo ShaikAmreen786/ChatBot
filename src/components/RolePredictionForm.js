@@ -500,6 +500,30 @@ export default function RolePredictionForm() {
                         </div>
                     </div>
 
+                    {/* Certifications Dropdown */}
+                    <div className="space-y-4">
+                        <label className="block text-lg font-semibold text-gray-700" htmlFor="certifications">
+                            Certifications
+                        </label>
+                        <select
+                            name="certifications"
+                            value={formData.certifications}
+                            onChange={handleChange}
+                            className="block w-full p-3 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        >
+                            <option value="">Select a certification</option>
+                            <option value="0">Shell Programming</option>
+                            <option value="1">Machine Learning</option>
+                            <option value="2">App Development</option>
+                            <option value="3">Python</option>
+                            <option value="4">R Programming</option>
+                            <option value="5">Information Security</option>
+                            <option value="6">Hadoop</option>
+                            <option value="7">Distro Making</option>
+                            <option value="8">Full Stack</option>
+                        </select>
+                    </div>
+
                     {/* Hidden Fields */}
                     <input type="hidden" name="first_computer" value={formData.first_computer} />
                     <input type="hidden" name="first_program" value={formData.first_program} />
